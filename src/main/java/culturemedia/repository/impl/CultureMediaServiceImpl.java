@@ -19,12 +19,12 @@ public class CultureMediaServiceImpl implements CultureMediaService {
 
     @Override
     public Video save(Video save) {
-        return null;
+        return save;
     }
 
     @Override
     public View save(View save) {
-        return null;
+        return save;
     }
 }
 
