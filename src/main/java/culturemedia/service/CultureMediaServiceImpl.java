@@ -40,5 +40,23 @@ public class CultureMediaServiceImpl implements CultureMediaService {
     public View save(View view) {
         return viewsRepository.save(view);
     }
+
+    @Override
+    public List<Video> find(String title) throws VideoNotFoundException {
+        List<Video> filteredVideos = videoRepository.find(title);
+        if (filteredVideos.isEmpty()) {
+            throw new VideoNotFoundException("No video found with title: " + title);
+        }
+        return filteredVideos;
+    }
+
+    @Override
+    public List<Video> find(double fromDuration, double toDuration) throws VideoNotFoundException {
+        List<Video> filteredVideos = videoRepository.find(fromDuration, toDuration);
+        if (filteredVideos.isEmpty()) {
+            throw new VideoNotFoundException("No videos found in the specified duration range.");
+        }
+        return filteredVideos;
+    }
 }
 
