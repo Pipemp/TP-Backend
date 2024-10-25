@@ -39,7 +39,7 @@ public class VideoRepositoryImpl implements VideoRepository {
     public List<Video> find(Double fromDuration, Double toDuration) {
         List<Video> filteredVideos = new ArrayList<>();
         for (Video video : videos) {
-            if (video.duration() >= fromDuration && video.duration() <= toDuration) {  // Usamos >= y <= para incluir los límites del rango
+            if (video.duration() >= fromDuration && video.duration() <= toDuration) {
                 filteredVideos.add(video);
             }
         }
