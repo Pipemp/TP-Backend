@@ -3,7 +3,7 @@ package culturemedia.repository.impl;
 import culturemedia.exception.VideoNotFoundException;
 import culturemedia.model.Video;
 import culturemedia.repository.CultureMediaService;
-import culturemedia.service.CultureMediaServiceImpl;
+import culturemedia.service.impl.CultureMediaServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
