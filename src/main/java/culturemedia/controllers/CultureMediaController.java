@@ -16,10 +16,8 @@ public class CultureMediaController {
     }
 
 
-    public List<Video> find_allVideos() throws VideoNotFoundException {
-        List<Video> videos = null;
-        videos = cultureMediaService.findAll();
-        return videos;
+    public List<Video> findAllVideos() throws VideoNotFoundException {
+        return cultureMediaService.findAll();
     }
 
 
