@@ -1,9 +1,9 @@
-package culturemedia.repository.impl;
+package culturemedia.service.impl;
 
 import culturemedia.exception.VideoNotFoundException;
 import culturemedia.model.Video;
-import culturemedia.repository.CultureMediaService;
-import culturemedia.service.impl.CultureMediaServiceImpl;
+import culturemedia.repository.impl.VideoRepositoryImpl;
+import culturemedia.repository.impl.ViewsRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,66 +39,41 @@ public class CultureMediaServiceImplTest {
     }
 
     @Test
-    void when_FindAll_all_videos_should_be_returned_successfully() {
-        try {
+    void when_FindAll_all_videos_should_be_returned_successfully() throws VideoNotFoundException {
             List<Video> videos = cultureMediaService.findAll();
-            if (videos.isEmpty()) {
-                throw new VideoNotFoundException("No videos found");
-            }
             assertEquals(6, videos.size());
-        } catch (VideoNotFoundException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
     }
 
 
     @Test
-    void when_FindAll_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() {
-        try {
+    void when_FindAll_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException {
             cultureMediaService.findAll();
             Assertions.assertTrue(false, "Expected VideoNotFoundException to be thrown, but it was not.");
-        } catch (VideoNotFoundException e) {
-            assertEquals("No videos found", e.getMessage());
-        }
     }
 
 
     @Test
-    void when_FindByTitle_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() {
-        try {
+    void when_FindByTitle_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException {
             String titleToSearch = "Título Inexistente";
             List<Video> videos = cultureMediaService.find(titleToSearch);
-
-            if (videos.isEmpty()) {
-                throw new VideoNotFoundException("No video found with title: " + titleToSearch);
-            }
-
             assertEquals(0, videos.size());
-        } catch (VideoNotFoundException e) {
-            assertEquals("No video found with title: Título Inexistente", e.getMessage());
-        }
     }
 
     @Test
-    void when_FindByTitle_finds_videos_successfully() {
+    void when_FindByTitle_finds_videos_successfully() throws VideoNotFoundException {
         String titleToSearch = "Clic";
-        try {
             List<Video> videos = cultureMediaService.find(titleToSearch);
             assertFalse(videos.isEmpty(), "Expected videos to be found but none were returned.");
             assertEquals(2, videos.size());
             for (Video video : videos) {
                 assertTrue(video.title().contains(titleToSearch), "Expected video title to contain: " + titleToSearch);
             }
-        } catch (VideoNotFoundException e) {
-            fail("Expected videos to be found, but VideoNotFoundException was thrown: " + e.getMessage());
-        }
     }
 
     @Test
-    void when_FindByDuration_finds_videos_successfully() {
+    void when_FindByDuration_finds_videos_successfully() throws VideoNotFoundException {
         double fromDuration = 4.0;
         double toDuration = 5.5;
-        try {
             List<Video> videos = cultureMediaService.find(fromDuration, toDuration);
             assertFalse(videos.isEmpty(), "Expected videos to be found but none were returned.");
             assertEquals(4, videos.size());
@@ -106,26 +81,14 @@ public class CultureMediaServiceImplTest {
                 assertTrue(video.duration() >= fromDuration && video.duration() <= toDuration,
                         "Expected video duration to be within range: " + video.duration());
             }
-        } catch (VideoNotFoundException e) {
-            // Si se lanza la excepción, el test debe fallar
-            fail("Expected videos to be found, but VideoNotFoundException was thrown: " + e.getMessage());
-        }
     }
 
     @Test
-    void when_FindByDuration_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() {
+    void when_FindByDuration_does_not_find_any_video_an_VideoNotFoundException_should_be_thrown_successfully() throws VideoNotFoundException {
         double fromDuration = 10.0;
         double toDuration = 15.0;
-
-        try {
-
             List<Video> videos = cultureMediaService.find(fromDuration, toDuration);
-
             assertTrue(videos.isEmpty(), "Expected no videos to be found, but some were returned.");
-        } catch (VideoNotFoundException e) {
-
-            assertEquals("No videos found in the specified duration range.", e.getMessage());
-        }
     }
 }
 
