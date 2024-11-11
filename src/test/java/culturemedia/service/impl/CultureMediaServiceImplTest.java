@@ -6,7 +6,6 @@ import static org.mockito.Mockito.*;
 import culturemedia.exception.VideoNotFoundException;
 import culturemedia.model.Video;
 import culturemedia.repository.VideoRepository;
-import culturemedia.repository.ViewsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

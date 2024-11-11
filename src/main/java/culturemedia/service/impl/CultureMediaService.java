@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CultureMediaService {
     List<Video> findAll() throws VideoNotFoundException;
-    Video save (Video save);
+    Video save (Video save) throws VideoNotFoundException;
     View save (View save);
     List<Video> find(String title) throws VideoNotFoundException;
     List<Video> find(double fromDuration, double toDuration) throws VideoNotFoundException;
