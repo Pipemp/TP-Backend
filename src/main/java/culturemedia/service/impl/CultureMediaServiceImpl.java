@@ -5,14 +5,16 @@ import culturemedia.model.Video;
 import culturemedia.model.View;
 import culturemedia.repository.VideoRepository;
 import culturemedia.repository.ViewsRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CultureMediaServiceImpl implements CultureMediaService {
-    private VideoRepository videoRepository;
-    private ViewsRepository viewsRepository;
+    private final VideoRepository videoRepository;
+    private final ViewsRepository viewsRepository;
 
-    // Constructor para inyectar los repositorios
+
     public CultureMediaServiceImpl(VideoRepository videoRepository, ViewsRepository viewsRepository) {
         this.videoRepository = videoRepository;
         this.viewsRepository = viewsRepository;
@@ -22,7 +24,6 @@ public class CultureMediaServiceImpl implements CultureMediaService {
     public List<Video> findAll() throws VideoNotFoundException {
         List<Video> videos = videoRepository.findAll();
 
-        // Si la lista de videos está vacía, lanzar la excepción
         if (videos.isEmpty()) {
             throw new VideoNotFoundException("No videos found");
         }
